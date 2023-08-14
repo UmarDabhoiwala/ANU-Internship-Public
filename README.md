@@ -14,6 +14,6 @@ MP3's
 
 ## Instructions 
 
-create a config.py file for API Keys 
-pip install -r requirements.txt
-flask run
+1. create a config.py file for API Keys
+2. pip install -r requirements.txt
+3. flask run
