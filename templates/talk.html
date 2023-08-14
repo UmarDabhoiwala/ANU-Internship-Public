@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<audio id="myAudio" source src="/static/audio/output.wav" type = "audio/wav"> </audio>
+
+<head>
+	
+	<script>
+	function loading() {
+		document.getElementById("loading").style.display = "block";
+		document.getElementById("content").style.display = "none";
+		} 
+	</script>
+
+	<script>
+		function unLoad() {
+			document.getElementById("loading").style.display = "none";
+			document.getElementById("content").style.display = "block";
+			} 
+	</script>
+
+	<script>
+		function enableSubmit(){
+			let inputs = document.getElementsByClassName('required'); 
+			let btn = document.querySelector('input[type="submit"]');
+
+			let isValid = true;
+
+			for (var i = 0; i < inputs.length; i++){
+				let changedInput = inputs[i];
+				if (changedInput.value.trim() === "" || changedInput.value === null)
+				{isValid = false;break;
+				}
+			}
+			btn.disabled = !isValid;
+		}
+	</script>
+
+	
+
+	<script>
+		
+		let mediaRecorder;
+		let recordedChunks = [];
+	
+		async function startRecording() {
+			try {
+				const mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+				const options = { mimeType: 'audio/webm' };
+				mediaRecorder = new MediaRecorder(mediaStream, options);
+				mediaRecorder.ondataavailable = (e) => {
+					recordedChunks.push(e.data);
+				};
+				mediaRecorder.start();
+			} catch (err) {
+				console.error("Failed to start recording:", err);
+			}
+		}
+	
+		async function stopRecording() {
+
+			loading()
+			if (mediaRecorder) {
+				mediaRecorder.stop();
+				const audioBlob = new Blob(recordedChunks, { type: 'audio/webm' });
+				console.log(audioBlob);
+				const formData = new FormData();
+				formData.append('audio', audioBlob);
+				console.log(formData);
+
+	
+				recordedChunks = [];
+	
+				fetch('/save_audio', {
+					method: 'POST',
+					body: formData
+				}).then(response => {
+					if (!response.ok) {
+						throw new Error(`Error: ${response.statusText}`);
+					}
+					console.log('Audio file saved successfully');
+					var audio = document.getElementById("myAudio");
+					audio.play();
+					unLoad()
+				}).catch(error => {
+					console.error('Failed to save audio file:', error);
+				});
+			}
+		}
+	</script>
+<title>Talk to Robots</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body onpageshow="unLoad()"> 
+<div id="loading">
+	<h1>Generating AI Response (This Will Take a Bit 2-3 minutes)</h1>
+	<h2>Loading...</h2>
+</div> 
+<body>
+	<div id="content">
+		<div class="container">
+			<h1>Talk to the AI</h1>
+			<form method="post" action="{{ url_for('audio_wait') }}", id = "audio-form">
+				<button type="button" onmousedown="startRecording()" onmouseup="stopRecording();enableSubmit()" >Record Audio</button>
+			
+				<input type="submit" name="Finish Conversation" value="Finish Conversation" onclick = "loading()" disabled>
+			</form>
+		</div>
+	</div>  
+</body>
+</html>

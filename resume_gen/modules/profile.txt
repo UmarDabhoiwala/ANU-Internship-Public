@@ -1,0 +1,6 @@
+  "profiles": {[{
+        "network": "Twitter",
+        "username": "john",
+        "url": "https://twitter.com/john"
+      }]
+  }

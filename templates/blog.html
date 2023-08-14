@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+		<script>
+			function loading() {
+				document.getElementById("loading").style.display = "block";
+				document.getElementById("content").style.display = "none";
+			  } 
+			</script>
+		
+			<script>
+				function unLoad() {
+					document.getElementById("loading").style.display = "none";
+					document.getElementById("content").style.display = "block";
+				  } 
+	</script>
+
+	<script>
+		function enableSubmit(){
+			let inputs = document.getElementsByClassName('required'); 
+			let btn = document.querySelector('input[type="submit"]');
+
+			let isValid = true;
+
+			for (var i = 0; i < inputs.length; i++){
+				let changedInput = inputs[i];
+				if (changedInput.value.trim() === "" || changedInput.value === null)
+				{isValid = false;break;
+				}
+			}
+			btn.disabled = !isValid;
+		}
+	</script>
+	
+	<title>Sheet Generator</title>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body onpageshow="unLoad()"> 
+<body>
+	<div id="loading">
+		<h1>Blog Generating (This Will Take a Bit)</h1>
+		<h2>Loading...</h2>
+	</div>  
+	<div id="content">
+		<div class="container">
+			<h1>Static Blog Generator </h1>
+			<form method="post" action="{{ url_for('generate_blog') }}", id = "resume-blog">
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author" required class="required" onkeyup = "enableSubmit()">
+
+				<label for="num-blogs">Enter the number of blog posts (maximum 10):</label>
+				<input type="number" id="num-blogs" name="num_blogs" min="1" max="10" required class="required" onkeyup = "enableSubmit()">
+
+                <label for="topic">Blog Topic:</label>
+                <input type="text" id="blog-topic" name="blog_topic" required class="required" onkeyup = "enableSubmit()">
+
+
+				<input type="submit" name="Generate Blog" value="Generate Blog" disabled onclick= "loading()">
+			</form>
+		</div>
+	</div>  
+</body>
+</html>

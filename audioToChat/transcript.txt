@@ -1,0 +1,4 @@
+user: I can't think of anything to say I'm too shy
+
+assistant: That's okay! It's normal to feel a little shy or nervous sometimes. Is there anything specific you want to talk about or do you need any help with something? I'm here to assist you in any way I can, so don't hesitate to ask for anything. Maybe we can start by discussing a topic that you are interested in and take it from there?
+

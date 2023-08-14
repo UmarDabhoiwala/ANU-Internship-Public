@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download File</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+
+
+  </head>
+  <body>
+    <div class="container">
+      <h1>Download the File </h1>
+
+      
+      <button><a href="{{url_for('download', message = path)}}" style="color:#212121; text-decoration: none; width: 200%; height: 200%;">Download</a></button>
+
+     
+    </div>
+  </body>
+</html>

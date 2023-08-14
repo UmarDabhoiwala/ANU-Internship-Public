@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generated Playlist</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Generated Playlist</h1>
+        <p>You can find the playlist at the following URL:</p>
+        <a href="{{ playlist_url }}" target="_blank">{{ playlist_url }}</a>
+        <br>
+        <a href="{{ url_for('Spotify_Rec') }}">Go back to the main page</a>
+    </div>
+</body>
+</html>

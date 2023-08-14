@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function loading() {
+            document.getElementById("loading").style.display = "block";
+            document.getElementById("content").style.display = "none";
+        }
+    </script>
+
+    <script>
+        function enableSubmit(){
+            let inputs = document.getElementsByClassName('required');
+            let btn = document.querySelector('input[type="submit"]');
+
+            let isValid = true;
+
+            for (var i = 0; i < inputs.length; i++){
+                let changedInput = inputs[i];
+                if (changedInput.value.trim() === "" || changedInput.value === null)
+                {isValid = false;break;
+                }
+            }
+            btn.disabled = !isValid;
+        }
+    </script>
+
+    <script>
+        function addMedia() {
+			let input = document.getElementById('media-input');
+			let mediaContainer = document.getElementById('media-container');
+			let media = input.value.trim();
+
+			if (media !== '') {
+				let mediaDiv = document.createElement('div');
+				mediaDiv.className = 'media-item';
+				mediaDiv.textContent = media;
+
+				// Add the hidden input for the media item
+				let hiddenInput = document.createElement('input');
+				hiddenInput.type = 'hidden';
+				hiddenInput.name = 'media[]';
+				hiddenInput.value = media;
+				mediaDiv.appendChild(hiddenInput);
+
+				let closeButton = document.createElement('span');
+				closeButton.className = 'media-close';
+				closeButton.innerHTML = '&times;';
+				closeButton.onclick = function() {
+					mediaContainer.removeChild(mediaDiv);
+				};
+
+				mediaDiv.appendChild(closeButton);
+				mediaContainer.appendChild(mediaDiv);
+				input.value = '';
+			}
+		}
+
+    </script>
+
+    <style>
+        .media-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .media-item {
+            background-color: blue;
+            color: white;
+            border-radius: 20px;
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .media-close {
+            margin-left: 5px;
+            cursor: pointer;
+        }
+    </style>
+
+    <title>Sheet Generator</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div id="loading">
+        <h2>Loading...</h2>
+    </div>
+    <div id="content">
+        <div class="container">
+            <h1>Spotify Playlist Generator</h1>
+            <form method="post" action="{{ url_for('generate_playlist') }}">
+                <label for="media-type">Type of Media:</label>
+                <select id="media-type" name="sheet-type">
+                    <option value="books">Books</option>
+                    <option value="films">Movies</option>
+                    <option value="games">Games</option>
+                </select>
+                <br>
+                <label for="media-input">Favourite Media:</label>
+                <input type="text" id="media-input" placeholder="Enter media name" onkeypress="if(event.keyCode == 13) {event.preventDefault(); addMedia();}">
+                <button type="button" onclick="addMedia()">Add</button>
+                <div id="media-container" class="media-container"></div>
+                <input type="submit" name="Generate Playlist" value="Generate Playlist">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

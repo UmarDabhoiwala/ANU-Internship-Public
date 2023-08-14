@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+		function loading() {
+			document.getElementById("loading").style.display = "block";
+			document.getElementById("content").style.display = "none";
+		  } 
+		</script>
+	
+		<script>
+			function unLoad() {
+				document.getElementById("loading").style.display = "none";
+				document.getElementById("content").style.display = "block";
+			  } 
+		</script>
+
+	<script>
+		function enableSubmit(){
+			let inputs = document.getElementsByClassName('required'); 
+			let btn = document.querySelector('input[type="submit"]');
+
+			let isValid = true;
+
+			for (var i = 0; i < inputs.length; i++){
+				let changedInput = inputs[i];
+				if (changedInput.value.trim() === "" || changedInput.value === null)
+				{isValid = false;break;
+				}
+			}
+			btn.disabled = !isValid;
+		}
+	</script>
+	
+	<title>Sheet Generator</title>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body onpageshow="unLoad()"> 
+<body>
+	<div id="loading">
+		<h1>Resume is Generating (This Will Take a Bit 2-3 minutes)</h1>
+		<h2>Loading...</h2>
+	</div>  
+	<div id="content">
+		<div class="container">
+			<h1>Resume Generator </h1>
+			<h2> Blank Fields will be automatically generated <h2>
+			<form method="post" action="{{ url_for('generate_resume') }}", id = "resume-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+
+                <label for="job-title">Job Title:</label>
+                <input type="text" id="job-title" name="job_title">
+
+                <label for="phone-number">Phone Number:</label>
+                <input type="tel" id="phone-number" name="phone_number">
+
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address">
+
+                <label for="company1">Company1:</label>
+                <input type="text" id="company1" name="company1">
+
+                <label for="company2">Company2:</label>
+                <input type="text" id="company2" name="company2">
+
+                <label for="company3">Company3:</label>
+                <input type="text" id="company3" name="company3">
+
+
+				<input type="submit" id="primary-submit" name="Generate Resume" value="Generate Resume" onclick= "loading()">
+			</form>
+		</div>
+	</div>  
+</body>
+</html>

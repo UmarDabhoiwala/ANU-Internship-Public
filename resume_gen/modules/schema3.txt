@@ -1,0 +1,164 @@
+{
+"basics": {
+"name": "XXX",
+"label": "XXX",
+"image": "XXX",
+"email": "XXX",
+"phone": "XXX",
+"url": "XXX",
+"summary": "XXX",
+"location": {
+"address": "XXX",
+"postalCode": "XXX",
+"city": "XXX",
+"countryCode": "XXX",
+"region": "XXX"
+},
+"profiles": [{
+"network": "XXX",
+"username": "XXX",
+"url": "XXX"
+},
+{
+"network": "XXX",
+"username": "XXX",
+"url": "XXX"
+}]
+},
+"work": [{
+"name": "XXX",
+"position": "XXX",
+"url": "XXX",
+"startDate": "XXX",
+"summary": "XXX",
+"highlights": [
+"XXX",
+"XXX",
+"XXX"
+]
+},
+{
+"name": "XXX",
+"position": "XXX",
+"url": "XXX",
+"startDate": "XXX",
+"endDate": "XXX",
+"summary": "XXX",
+"highlights": [
+"XXX",
+"XXX",
+"XXX",
+"XXX"
+]
+},
+{
+"name": "XXX",
+"position": "XXX",
+"url": "XXX",
+"startDate": "XXX",
+"endDate": "XXX",
+"summary": "XXX",
+"highlights": [
+"XXX",
+"XXX"
+]
+},
+{
+"name": "XXX",
+"position": "XXX",
+"url": "XXX",
+"startDate": "XXX",
+"endDate": "XXX",
+"summary": "XXX",
+"highlights": [
+"XXX",
+"XXX",
+"XXX"
+]
+},
+{
+"name": "XXX",
+"position": "XXX",
+"url": "XXX",
+"startDate": "XXX",
+"endDate": "XXX",
+"summary": "XXX",
+"highlights": [
+"XXX",
+"XXX",
+"XXX"
+]
+}],
+"volunteer": [{
+"organization": "XXX",
+"position": "XXX",
+"url": "XXX",
+"startDate": "XXX",
+"endDate": "XXX",
+"summary": "XXX",
+"highlights": [
+"XXX",
+"XXX",
+"XXX"
+]
+}],
+"education": [{
+"institution": "XXX",
+"url": "XXX",
+"area": "XXX",
+"studyType": "XXX",
+"startDate": "XXX",
+"endDate": "XXX",
+"score": "XXX",
+"courses": [
+"XXX"
+]
+}],
+"awards": [{
+"title": "XXX",
+"date": "XXX",
+"awarder": "XXX",
+"summary": "XXX"
+},
+{
+"title": "XXX",
+"date": "XXX",
+"awarder": "XXX",
+"summary": "XXX"
+}],
+"certificates": [{
+"name": "XXX",
+"date": "XXX",
+"issuer": "XXX",
+"url": "XXX"
+}],
+"skills": [{
+"name": "XXX",
+"level": "XXX",
+"keywords": [
+"XXX",
+"XXX",
+"XXX",
+"XXX",
+"XXX"
+]
+},
+{
+"name": "XXX",
+"level": "XXX",
+"keywords": [
+"XXX",
+"XXX",
+"XXX"
+]
+},
+{
+"name": "XXX",
+"level": "XXX",
+"keywords": [
+"XXX",
+"XXX",
+"XXX"
+]
+}]
+}

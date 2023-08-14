@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+	function loading() {
+		document.getElementById("loading").style.display = "block";
+		document.getElementById("content").style.display = "none";
+	  } 
+	</script>
+
+	<script>
+		function unLoad() {
+			document.getElementById("loading").style.display = "none";
+			document.getElementById("content").style.display = "block";
+		  } 
+	</script>
+
+	<script>
+		function enableSubmit(){
+			let inputs = document.getElementsByClassName('required'); 
+			let btn = document.querySelector('input[type="submit"]');
+
+			let isValid = true;
+
+			for (var i = 0; i < inputs.length; i++){
+				let changedInput = inputs[i];
+				if (changedInput.value.trim() === "" || changedInput.value === null)
+				{isValid = false;break;
+				}
+			}
+			btn.disabled = !isValid;
+		}
+	</script>
+	
+	<title>Sheet Generator</title>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body onpageshow="unLoad()"> 
+<body>
+	<div id="loading">
+		<h1>Cover Letter is Generating (This Can Take a While)</h1>
+		<h2>Loading...</h2>
+	</div>  
+	<div id="content">
+		<div class="container">
+			<h1>Cover Letter Generator</h1>
+			<form method="post" action="{{ url_for('generate_CoverLetter') }}" enctype="multipart/form-data">
+				
+				<label for="File">Upload your resume (pdf or docx)</label>
+				<input type="file" name="file" required class="required">
+
+
+				<label for="Company">Enter the Company</label>
+				<input type="text" id="company" name="company" required class="required" onkeyup = "enableSubmit()" >
+
+				<label for="Job_Title">Enter the Job Title</label>
+				<input type="text" id="job_title" name="job_title" required class="required" onkeyup = "enableSubmit()">
+
+				
+				<input type="submit" name="Generate Cover Letter" value="Generate Cover Letter" onclick = "loading()" disabled>
+			</form>
+		</div>
+	</div>  
+</body>
+</html>
+
+

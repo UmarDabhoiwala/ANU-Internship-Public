@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+	function loading() {
+		document.getElementById("loading").style.display = "block";
+		document.getElementById("content").style.display = "none";
+	  } 
+	</script>
+
+	<script>
+		function unLoad() {
+			document.getElementById("loading").style.display = "none";
+			document.getElementById("content").style.display = "block";
+		  } 
+	</script>
+    
+    <body onpageshow="showButtons()"> 
+	<title>Sheet Generator</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	<script>
+		function enableSubmit(){
+			let inputs = document.getElementsByClassName('required'); 
+			let btn = document.querySelector('input[type="submit"]');
+			let isValid = true;
+			for (var i = 0; i < inputs.length; i++){
+				let changedInput = inputs[i];
+				if (changedInput.value.trim() === "" || changedInput.value === null) {
+					isValid = false;
+					break;
+				}
+			}
+			btn.disabled = !isValid;
+		}
+	</script>
+    
+	<script>
+        function showButtons() {
+            var dropdown = document.getElementById("sheet-type");
+            var inputContainer = document.getElementById("input-container");
+            var selectedValue = dropdown.options[dropdown.selectedIndex].value;
+
+            var inputHtml = '';
+
+            if (selectedValue === "1" || selectedValue === "4") {
+                inputHtml += '<div>';
+                inputHtml += '<label for="companyA-name">Name of Aquiring Company:</label>';
+                inputHtml += '<input type="text" id="companyA-name" name="companyA_name" class="required" onkeyup="enableSubmit()">';
+                inputHtml += '</div>';
+
+                inputHtml += '<div>';
+                inputHtml += '<label for="companyB-name">Name of Target Company:</label>';
+                inputHtml += '<input type="text" id="companyB-name" name="companyB_name" class="required" onkeyup="enableSubmit()">';
+                inputHtml += '</div>';
+            } 
+            else if (selectedValue == '0'){
+                inputHtml += '<div>';
+                inputHtml += '<label for="prompt-type">Write Your Own Type of Document</label>';
+                inputHtml += '<input type="text" id="prompt-type" name="prompt_type" class="required" onkeyup="enableSubmit()">';
+                inputHtml += '</div>';
+            }
+            else if (selectedValue == '10'){
+                inputHtml += '<div>';
+                inputHtml += '<label for="companyA-name">Name of Company:</label>';
+                inputHtml += '<input type="text" id="companyA-name" name="companyA_name" class="required" onkeyup="enableSubmit()">';
+                inputHtml += '</div>';
+
+                inputHtml += '<div>';
+                inputHtml += '<label for="companyA-employee-name">Name of Employee:</label>';
+                inputHtml += '<input type="text" id="companyA-employee-name" name="companyA_employee_name" class="required" onkeyup="enableSubmit()">';
+                inputHtml += '</div>';
+
+                inputHtml += '<div>';
+                inputHtml += '<label for="companyA-employee-position">Employee Position:</label>';
+                inputHtml += '<input type="text" id="companyA-employee-position" name="companyA_employee_position" class="required" onkeyup="enableSubmit()">';
+                inputHtml += '</div>';
+            }
+            
+            else {
+                inputHtml += '<div>';
+                inputHtml += '<label for="companyA-name">Company Name:</label>';
+                inputHtml += '<input type="text" id="companyA-name" name="companyA_name" class="required" onkeyup="enableSubmit()">';
+                inputHtml += '</div>';
+            }
+            inputContainer.innerHTML = inputHtml;
+        }
+    </script>
+    
+</head>
+<body onpageshow="unLoad()"> 
+<body>
+	<div id="loading">
+		<h1>Document is Generating (This Can Take a While)</h1>
+		<h2>Loading...</h2>
+	</div>  
+	<div id="content">
+		<div class="container">
+			<h1>Word Document Generator</h1>
+			<form method="post" action="{{ url_for('generate_word') }}">
+				<label for="sheet-type">Select the type of document to generate:</label>
+				<select id="sheet-type" name="sheet-type" onchange="showButtons()" >
+					<option value="1">Hostile Takeover</option>
+					<option value="2">Annual Report</option>
+					<option value="3">Investment Prospects</option>
+					<option value="4">Mergers and Aquisitions</option>
+					<option value="5">Loan Agreement</option>
+                    <option value="6">Regulatory Filing</option>
+                    <option value="7">Credit Rating Report</option>
+                    <option value="8">Financial Statement</option>
+                    <option value="9">Shareholder Report</option>
+                    <option value="10">Employee Review</option>
+                    <option value="11">Environmental, Social and Governance Report</option>
+                    <option value="12">Litigation Document</option>
+                    <option value="13">Market Research</option>     
+                    <option value="0">Custom Prompt</option>  
+				</select>
+                <div id="input-container"></div>
+                <input type="submit" name="Generate Word Document" value="Generate Word Document" onclick = "loading()">
+			</form>
+		</div>
+	</div>  
+</body>
+</html>

@@ -1,0 +1,48 @@
+[input]
+base_directory = "/home/umar.dabhoiwala/Documents/pelicanGen/website/output"
+html_selector = "main"
+
+[[input.files]]
+path = "health-benefits-indian-chai.html"
+url = "/health-benefits-indian-chai.html"
+title = "The Health Benefits of Indian Chai"
+
+[[input.files]]
+path = "regional-varieties-indian-chai.html"
+url = "/regional-varieties-indian-chai.html"
+title = "Exploring the Regional Varieties of Indian Chai"
+
+[[input.files]]
+path = "tea-is-better-than-coffee.html"
+url = "/tea-is-better-than-coffee.html"
+title = "Why Tea is the Clear Winner over Coffee"
+
+[[input.files]]
+path = "art-of-indian-chai.html"
+url = "/art-of-indian-chai.html"
+title = "The Art of Perfecting Indian Chai"
+
+[[input.files]]
+path = "tea-tasting-art.html"
+url = "/tea-tasting-art.html"
+title = "The Art of Tea Tasting"
+
+[[input.files]]
+path = "tea-leaf-reading.html"
+url = "/tea-leaf-reading.html"
+title = "The Art of Tea Leaf Reading"
+
+[[input.files]]
+path = "tea-drunk.html"
+url = "/tea-drunk.html"
+title = "Tea Drunk: A Journey Through Intoxication"
+
+[[input.files]]
+path = "nepalese-tea-aromatic-bliss.html"
+url = "/nepalese-tea-aromatic-bliss.html"
+title = "The Aromatic Bliss of Nepalese Tea"
+
+[[input.files]]
+path = "history-yixing-teapots.html"
+url = "/history-yixing-teapots.html"
+title = "A Brief History of Yixing Teapots"

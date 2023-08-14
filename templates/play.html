@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Audio playback example</title>
+    <script>
+        function playAudio() {
+            var audio = document.getElementById("myAudio");
+            audio.play();
+        }
+    </script>
+</head>
+<body>
+    <audio id="myAudio" src="/audio_uploads/output.wav"></audio>
+    <h1>Click the button to play the audio file</h1>
+    <button onclick="playAudio()">Play audio</button>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+	function loading() {
+		document.getElementById("loading").style.display = "block";
+		document.getElementById("content").style.display = "none";
+	  } 
+	</script>
+
+	<script>
+		function unLoad() {
+			document.getElementById("loading").style.display = "none";
+			document.getElementById("content").style.display = "block";
+		  } 
+	</script>
+
+	<script>
+		function enableSubmit(){
+			let inputs = document.getElementsByClassName('required'); 
+			let btn = document.querySelector('input[type="submit"]');
+
+			let isValid = true;
+
+			for (var i = 0; i < inputs.length; i++){
+				let changedInput = inputs[i];
+				if (changedInput.value.trim() === "" || changedInput.value === null)
+				{isValid = false;break;
+				}
+			}
+			btn.disabled = !isValid;
+		}
+	</script>
+	
+	<title>Sheet Generator</title>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body onpageshow="unLoad()"> 
+<body>
+	<div id="loading">
+		<h1>PowerPoint is Generating (This Can Take a While)</h1>
+		<h2>Loading...</h2>
+	</div>  
+	<div id="content">
+		<div class="container">
+			<h1>PowerPoint Generator</h1>
+			<form method="post" action="{{ url_for('generate_PowerPoint') }}">
+				<label for="theme">Select the PowerPoint Design Theme</label>
+				<select id="theme" name="theme">
+					<option value=0>Blank</option>
+					<option value=1>Blue</option>
+					<option value=2>Dividend</option>
+					<option value=3>Green</option>
+					<option value=4>Integral</option>
+					<option value=5>Ion</option>
+					<option value=6>Paralax</option>
+					<option value=7>Red</option>
+					<option value=8>Slate</option>
+					<option value=9>Wavy</option>
+				</select>
+				<label for="subject">Enter a Subject for the PowerPoint (Default is AI's Choice):</label>
+				<input type="text" id="subject" name="subject">
+				<label for="num-slides">Enter the number of slides (Min 2-Max 10) - Note: More Slides = Longer Load:</label>
+				<input type="number" id="num-slides" name="num-slides" min="2" max="10" value = 2>
+				<label for="include-images">Include Images</label>
+				<input type="checkbox" id="include-images" name="include_images" value="yes">
+				<input type="submit" name="Generate PowerPoint File" value="Generate PowerPoint File" onclick = "loading()">
+			</form>
+		</div>
+	</div>  
+</body>
+</html>

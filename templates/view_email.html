@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email - {{ email.subject }}</title>
+    <!-- Material Design theme using Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='emailstyles.css') }}">
+    <style>
+        /* Center the container */
+        .email-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 50px auto;
+            max-width: 800px;
+        }
+
+        /* Increase the size of the text box */
+        #email-body-edit {
+            width: 100%;
+            height: 200px;
+            margin-top: 20px;
+            resize: none;
+        }
+
+        /* Style the send button */
+        .send-button {
+            margin-top: 20px;
+        }
+
+        /* Box around the email body */
+        .email-body {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .spinner-border {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            vertical-align: text-bottom;
+            border: .25em solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            -webkit-animation: spinner-border .75s linear infinite;
+            animation: spinner-border .75s linear infinite;
+        }
+
+        @keyframes spinner-border {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container email-container">
+        <h1>{{ email.subject }}</h1>
+        <p>{{ email.time }}</p>
+        <!-- Box around the email body -->
+        <div class="email-body">{{ email.body | safe }}</div>
+        <!-- Bigger text box -->
+
+        <div id="loading" class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+
+        <textarea id="email-body-edit" style="display: none;"></textarea>
+
+        <button id="refresh-button" class="btn btn-light mt-2"><i class="fas fa-sync"></i></button>
+        <button id="send-button" class="btn btn-primary send-button mt-2">Send</button>
+
+
+
+
+        <a href="/list_emails/primary" class="mt-3">Back to list</a>
+
+    </div>
+
+    <!-- jQuery, FontAwesome and Bootstrap scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/295fc40e35.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Handle refresh button click
+        $('#refresh-button').on('click', function(e) {
+            console.log('printed')
+            e.preventDefault();
+            loadEmail();
+        });
+
+
+        // Handle send button click
+        $('#send-button').on('click', function(e) {
+            e.preventDefault();
+            sendEmail();
+        });
+
+        function loadEmail() {
+            // Show the spinner and hide the textarea
+            document.getElementById('loading').style.display = 'block';
+            var textarea = document.getElementById('email-body-edit');
+            textarea.style.display = 'none';
+
+            // Call the Flask API to get the chatGPT response again
+            fetch('/view-email/chatGPT-response/{{ email.id }}')
+                .then(response => response.text())
+                .then(responseText => {
+                    // Hide the spinner and show the textarea
+                    document.getElementById('loading').style.display = 'none';
+                    textarea.style.display = 'block';
+                    textarea.value = responseText;
+                });
+        }
+
+        function sendEmail() {
+            // Get the text from the text area
+            var emailBody = $('#email-body-edit').val();
+
+            // Call the Flask API to send the email
+            $.ajax({
+                url: '/send-email',  // Replace with the correct API URL
+                type: 'POST',
+                data: {
+                    'email_body': emailBody
+                },
+                success: function(response) {
+                    // Handle the response from the server
+                    alert(response.message);
+                }
+            });
+        }
+
+    </script>
+
+    <script>
+        window.onload = function() {
+            fetch('/view-email/chatGPT-response/{{ email.id }}')
+                .then(response => response.text())
+                .then(responseText => {
+                    // Hide the spinner and show the textarea
+                    document.getElementById('loading').style.display = 'none';
+                    var textarea = document.getElementById('email-body-edit');
+                    textarea.style.display = 'block';
+                    textarea.value = responseText;
+                });
+        }
+    </script>
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+	function loading() {
+		document.getElementById("loading").style.display = "block";
+		document.getElementById("content").style.display = "none";
+	  } 
+	</script>
+
+	<script>
+		function unLoad() {
+			document.getElementById("loading").style.display = "none";
+			document.getElementById("content").style.display = "block";
+		  } 
+	</script>
+
+	<script>
+		function enableSubmit(){
+			let inputs = document.getElementsByClassName('required'); 
+			let btn = document.querySelector('input[type="submit"]');
+
+			let isValid = true;
+
+			for (var i = 0; i < inputs.length; i++){
+				let changedInput = inputs[i];
+				if (changedInput.value.trim() === "" || changedInput.value === null)
+				{isValid = false;break;
+				}
+			}
+			btn.disabled = !isValid;
+		}
+	</script>
+	
+	<title>Sheet Generator</title>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body onpageshow="unLoad()"> 
+<body>
+	<div id="loading">
+		<h1>Audio File is Generating (This Can Take a While)</h1>
+		<h2>Loading...</h2>
+	</div>  
+	<div id="content">
+		<div class="container">
+			<h1>Audio File Generator</h1>
+			<form method="post" action="{{ url_for('generate_AudioFile') }}">
+				<label for="voice">Select the Voice</label>
+				<select id="voice" name="voice">
+					<option value=10>Random</option>
+					<option value=0>Rachel</option>
+					<option value=1>Domi</option>
+					<option value=2>Bella</option>
+					<option value=3>Antoni</option>
+					<option value=4>Elli</option>
+					<option value=5>Josh</option>
+					<option value=6>Arnold</option>
+					<option value=7>Adam</option>
+					<option value=8>Sam</option>
+					<option value=9>Dayrl</option>
+				</select>
+				<label for="subject">Enter a Subject for the Audio File (Default is AI's Choice):</label>
+				<input type="text" id="subject" name="subject">
+				<input type="submit" name="Generate Audio File" value="Generate Audio File" onclick = "loading()">
+			</form>
+		</div>
+	</div>  
+</body>
+</html>
+
+

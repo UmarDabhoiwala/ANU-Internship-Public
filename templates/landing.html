@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+	<div class="container">
+		<h1>Fake Document Generator</h1>
+		<p>Please choose one of the following options:</p>
+		<button onclick="location.href='{{ url_for('Word') }}'">Word Document</button>
+        <button onclick="location.href='{{ url_for('PowerPoint') }}'">PowerPoint Document</button>
+		<button onclick="location.href='{{ url_for('Excel') }}'">Excel Document</button>
+		<button onclick="location.href='{{ url_for('AudioFile') }}'">Audio File</button>
+		<button onclick="location.href='{{ url_for('Resume') }}'">Resume</button>
+		<button onclick="location.href='{{ url_for('Cover_Letter') }}'">Cover Letter</button>
+		<button onclick="location.href='{{ url_for('Blog') }}'">Blog</button>
+		<button onclick="location.href='{{ url_for('Talk_To_Robots') }}'">Talk to Robots</button>
+		<button onclick="location.href='{{ url_for('EBook') }}'">E-Book</button>
+		<button onclick="location.href='{{ url_for('Gmail_Auth') }}'">Email-GPT</button>
+		<button onclick="location.href='{{ url_for('Cookbook') }}'">Recipe Book</button>
+		<button onclick="location.href='{{ url_for('Fake_Reviews') }}'">Fake Reviews</button>
+		<button onclick="location.href='{{ url_for('Spotify_Rec') }}'">Spotify Playlist</button>
+	</div>
+</body>
+</html>

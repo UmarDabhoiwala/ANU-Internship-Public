@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+	function loading() {
+		document.getElementById("loading").style.display = "block";
+		document.getElementById("content").style.display = "none";
+	  } 
+	</script>
+
+	<script>
+		function unLoad() {
+			document.getElementById("loading").style.display = "none";
+			document.getElementById("content").style.display = "block";
+		  } 
+	</script>
+    
+    <body onpageshow="showButtons()"> 
+	<title>Ebook Generator</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	<script>
+		function enableSubmit(){
+			let inputs = document.getElementsByClassName('required'); 
+			let btn = document.querySelector('input[type="submit"]');
+			let isValid = true;
+			for (var i = 0; i < inputs.length; i++){
+				let changedInput = inputs[i];
+				if (changedInput.value.trim() === "" || changedInput.value === null) {
+					isValid = false;
+					break;
+				}
+			}
+			btn.disabled = !isValid;
+		}
+	</script>
+
+</head>
+<body onpageshow="unLoad()"> 
+<body>
+	<div id="loading">
+		<h1>Document is Generating (This Can Take a While)</h1>
+		<h2>Loading...</h2>
+	</div>  
+	<div id="content">
+		<div class="container">
+			<h1>Ebook Generator</h1>
+			<form method="post" action="{{ url_for('generate_ebook') }}"id = "ebook-form">
+                
+                <label for="num-pages">Enter the number of stories (Min 2-Max 10) - Note: More stories = Longer Load:</label>
+                <input type="number" id="num-pages" name="num_pages" min="2" max="10" value = 2 class "required">
+
+                <label for="author-name">Author Name:</label>
+                <input type="text" id="author-name" name="author_name" class="required" onkeyup="enableSubmit()">
+            
+                <label for="genre">Genre:</label>
+                <input type="text" id="genre" name="genre" class="required" onkeyup="enableSubmit()">
+            
+                <label for="style">Style:</label>
+                <input type="text" id="style" name="style" class="required" onkeyup="enableSubmit()">
+            
+            
+                <label for="setting">Setting:</label>
+                <input type="text" id="setting" name="setting" class="required" onkeyup="enableSubmit()">
+				
+                <input type="submit" name="Generate Ebook" value="Generate Ebook" onclick = "loading()">
+			</form>
+		</div>
+	</div>  
+</body>
+</html>

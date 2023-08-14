@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+	function loading() {
+		document.getElementById("loading").style.display = "block";
+		document.getElementById("content").style.display = "none";
+	  }
+	</script>
+
+	<script>
+		function enableSubmit(){
+			let inputs = document.getElementsByClassName('required');
+			let btn = document.querySelector('input[type="submit"]');
+
+			let isValid = true;
+
+			for (var i = 0; i < inputs.length; i++){
+				let changedInput = inputs[i];
+				if (changedInput.value.trim() === "" || changedInput.value === null)
+				{isValid = false;break;
+				}
+			}
+			btn.disabled = !isValid;
+		}
+	</script>
+
+	<title>Sheet Generator</title>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+	<div id="loading">
+		<h2>Loading...</h2>
+	</div>
+	<div id="content">
+		<div class="container">
+			<h1>Review Generator</h1>
+			<h2>Can be Imported into GoodReads or LetterBoxd</h2>
+			<form method="post" action="{{ url_for('generate_reviews') }}">
+				<label for="review-type">Type of reviews to generate:</label>
+				<select id="review-type" name="review-type">
+					<option value="books">Books (GoodReads)</option>
+					<option value="movies">Movies (LetterBoxd)</option>
+				</select>
+				<label for="num-rows">Enter the number of rows (maximum 50):</label>
+				<input type="number" id="num-rows" name="num_rows" min="1" max="50" required class="required" onkeyup = "enableSubmit()">
+				<input type="submit" name="Generate Reviews" value="Generate Reviews"  disabled>
+			</form>
+		</div>
+	</div>
+</body>
+
+
+
+
+</html>

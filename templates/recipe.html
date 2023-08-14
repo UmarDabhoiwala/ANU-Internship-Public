@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+	function loading() {
+		document.getElementById("loading").style.display = "block";
+		document.getElementById("content").style.display = "none";
+	  } 
+	</script>
+
+	<script>
+		function unLoad() {
+			document.getElementById("loading").style.display = "none";
+			document.getElementById("content").style.display = "block";
+		  } 
+	</script>
+    
+    <body onpageshow="showButtons()"> 
+	<title>Ebook Generator</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	<script>
+		function enableSubmit(){
+			let inputs = document.getElementsByClassName('required'); 
+			let btn = document.querySelector('input[type="submit"]');
+			let isValid = true;
+			for (var i = 0; i < inputs.length; i++){
+				let changedInput = inputs[i];
+				if (changedInput.value.trim() === "" || changedInput.value === null) {
+					isValid = false;
+					break;
+				}
+			}
+			btn.disabled = !isValid;
+		}
+	</script>
+
+</head>
+<body onpageshow="unLoad()"> 
+<body>
+	<div id="loading">
+		<h1>Document is Generating (This Can Take a While)</h1>
+		<h2>Loading...</h2>
+	</div>  
+	<div id="content">
+		<div class="container">
+			<h1>Cookbook Generator</h1>
+			<form method="post" action="{{ url_for('generate_cookbook') }}"id = "cookbook-form">
+                
+                <label for="num-recipes">Enter the Number of Recipes (Min 1-Max 15) - Note: More Recipes = Longer Load:</label>
+                <input type="number" id="num-recipes" name="num_recipes" min="1" max="10" value = 1 class "required">
+
+                <label for="cuisine">Cuisine:</label>
+                <input type="text" id="cuisine" name="cuisine" class="required" onkeyup="enableSubmit()">
+    
+                <input type="submit" name="Generate Cookbook" value="Generate Cookbook" onclick = "loading()">
+			</form>
+		</div>
+	</div>  
+</body>
+</html>

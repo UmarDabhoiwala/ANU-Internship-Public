@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emails</title>
+    <!-- Material Design theme using Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+          integrity="sha384-lRgyEaEFwPvYj+k6fqkXbRnDEZmzv+rI7wPPU0KjDpPqMwvLpPIAHSN/9TuD7jTl"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='emailstyles.css') }}">
+</head>
+<body>
+    <h1><i class="far fa-envelope"></i> Emails</h1>
+    <div class="tabs">
+        <a class="tab {{ 'active' if tab == 'primary'}}" data-tab="primary" href="/list_emails/primary"><i class="fas fa-inbox"></i> Primary</a>
+        <a class="tab {{ 'active' if tab == 'social'}}" data-tab="social" href="/list_emails/social"><i class="fas fa-users"></i> Social</a>
+        <a class="tab {{ 'active' if tab == 'promotions' }}" data-tab="promotions" href="/list_emails/promotions"><i class="fas fa-bullhorn"></i> Promotions</a>
+        <a class="tab {{ 'active' if tab == 'updates'}}" data-tab="updates" href="/list_emails/updates"><i class="fas fa-sync-alt"></i> Updates</a>
+        <a class="tab {{ 'active' if tab == 'forum'}}" data-tab="forum" href="/list_emails/forum"><i class="fas fa-comments"></i> Forum</a>
+    </div>
+    
+    <div class="email-list-container container">
+        {% for email in emails %}
+        <div class="email-row" onclick="viewEmail('{{ email.id }}')">
+            <div class="email-details">
+                <h2>{{ email.subject }}</h2>
+                <p>{{ email.time }}</p>
+            </div>
+            <div class="email-actions">
+                <i class="far fa-star"></i>
+                <i class="fas fa-reply"></i>
+            </div>
+        </div>
+        {% endfor %}
+        {% if not emails %}
+        <p>No emails found.</p>
+        {% endif %}
+    </div>
+    <div>
+        <a href="{{ url_for('oauth2callback', label=label, next_page_token=next_page_token) }}"
+        class="next-page-link btn btn-primary">Load more</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script>
+         // Handle tab clicks
+        $('.tab').on('click', function(e) {
+            e.preventDefault();
+            $('.tab').removeClass('active');
+            $(this).addClass('active');
+            window.location.href = $(this).attr('href');
+        });
+
+        // View email
+        function viewEmail(id) {
+            window.location.href = "/view-email/" + id;
+        }
+
+    </script>
+
+</body>
+</html>
