@@ -2,16 +2,16 @@
  
 Flask Web Application, creates a multiple different realistic document types using openAI API and python.
 
-. Word Documents
-. PowerPoints
-. Excel Spreadsheets
-. Static Blogs 
-. Fake Reviews, importable into letterboxd and goodreads
-. PDF's 
-. Spotify Playlists 
-. Resume's
-. Cover Letters 
-. MP3's 
+- Word Documents
+- PowerPoints
+- Excel Spreadsheets
+- Static Blogs 
+- Fake Reviews, importable into letterboxd and goodreads
+- PDF's 
+- Spotify Playlists 
+- Resume's
+- Cover Letters 
+- MP3's 
 
 ## Instructions 
 
